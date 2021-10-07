@@ -12,15 +12,33 @@ const LoginPage = () => {
 
     }
 
-    const [loginFormState, setLoginFormState] = useState(loginForm)
+    const [loginFormData, setLoginFormData] = useState(loginForm)
 
     let history = useHistory()
 
     const login = (evt) => {
-        
+
         evt.preventDefault();
 
-        history.push('/')
+        fetch(
+            "http://localhost:5000/users/login",
+            {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(loginFormData)
+            }
+        )
+            .then(res => res.json())
+            .then((json) => {
+
+                alert(json.message)
+                history.push("/")
+
+            })
+            .catch(err => console.log(`Error :${err}`));
 
     }
 
@@ -33,19 +51,33 @@ const LoginPage = () => {
                         <div class="column is-6 is-4-desktop mb-5 mr-auto">
                             <div>
                                 <div class="mx-auto py-5 has-text-centered">
-                                    <form action="#">
+                                    <form onSubmit={login}>
                                         <span class="has-text-grey-dark">Sign In</span>
                                         <div class="field">
                                             <div class="control">
-                                                <input class="input" type="email" placeholder="E-mail address" />
+                                                <input class="input" type="email" placeholder="E-mail address" value={loginFormData.email} onChange={
+                                                    (evt) => {
+
+                                                        setLoginFormData({
+                                                            ...loginFormData, email: evt.target.value
+                                                        })
+                                                    }
+                                                } />
                                             </div>
                                         </div>
                                         <div class="field">
                                             <div class="control">
-                                                <input class="input" type="password" placeholder="Password" />
+                                                <input class="input" type="password" placeholder="Password" value={loginFormData.password} onChange={
+                                                    (evt) => {
+
+                                                        setLoginFormData({
+                                                            ...loginFormData, password: evt.target.value
+                                                        })
+                                                    }
+                                                } />
                                             </div>
                                         </div>
-                                        <button class="button is-primary mb-4 is-fullwidth" onClick={login}>Get Started</button>
+                                        <button class="button is-primary mb-4 is-fullwidth" >Get Started</button>
                                         <a class="mb-5 is-inline-block" href="#"><small>Forgot password?</small></a>
                                         <a class="button is-light mb-2 is-flex is-justify-content-center is-align-items-center is-fullwidth" href="#">
                                             <img class="image mr-2" style={{ height: '24px' }} src="../assets/img/socials/facebook.svg" alt="" />

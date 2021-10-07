@@ -20,12 +20,12 @@ function App() {
 
     <Switch location={location} key={location.pathname}>
       <Route exact path="/" component={HomePage} />
-      <Route exact path="/movies"  component={HomePage} />
-      <Route exact path="/tvShows"  component={TvShowPage} />
-      <Route exact path="/Sign Up"  component={SignUpPage} />
-      <Route exact path="/Login"  component={LoginPage} />
+      <Route exact path="/movies" component={MoviesPage} />
+      <Route exact path="/tvShows" component={TvShowPage} />
+      <Route exact path="/Sign Up" component={SignUpPage} />
+      <Route exact path="/Login" component={LoginPage} />
     </Switch>
-  
+
   );
 }
 

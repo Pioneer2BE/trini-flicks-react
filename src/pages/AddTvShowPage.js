@@ -2,7 +2,7 @@ import React from 'react'
 import Navbar from '../components/Navbar'
 import Footer from '../components/Footer'
 
-const MoviesPage = () => {
+const AddTvShowPage = () => {
     return (
         <>
             <Navbar />
@@ -11,4 +11,4 @@ const MoviesPage = () => {
     )
 }
 
-export default MoviesPage
+export default AddTvShowPage
